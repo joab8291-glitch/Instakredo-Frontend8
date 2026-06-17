@@ -1,5 +1,3 @@
-
-
 import heroImage from "@/assets/instakredo-hero.png";
 
 export const HeaderImage = () => {
