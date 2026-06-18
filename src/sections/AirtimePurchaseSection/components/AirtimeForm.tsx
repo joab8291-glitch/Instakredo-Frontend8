@@ -1,4 +1,27 @@
+import { useState } from "react";
+
+const OPERATORS = [
+  {
+    name: "Safaricom",
+    icon: "https://c.animaapp.com/mqh5jtbuMW9pRs/assets/safaricom.webp",
+    color: "text-green-700",
+  },
+  {
+    name: "Airtel",
+    icon: "https://c.animaapp.com/mqh5jtbuMW9pRs/assets/airtel.webp",
+    color: "text-red-600",
+  },
+  {
+    name: "Telkom",
+    icon: "https://c.animaapp.com/mqh5jtbuMW9pRs/assets/telcom.webp",
+    color: "text-sky-600",
+  },
+];
+
 export const AirtimeForm = () => {
+  const [selectedOperator, setSelectedOperator] = useState(OPERATORS[0]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   return (
     <form className="caret-transparent outline-[3px]">
       <input
@@ -31,17 +54,22 @@ export const AirtimeForm = () => {
           Select Operator : Safaricom, Airtel, Telkom
         </label>
         <div className="relative caret-transparent outline-[3px] w-full">
-          <div className="items-center bg-white caret-transparent flex justify-between outline-[3px] border border-stone-300 p-3 rounded-lg border-solid">
+          <div
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            className="items-center bg-white caret-transparent flex justify-between outline-[3px] border border-stone-300 p-3 rounded-lg border-solid cursor-pointer"
+          >
             <div className="items-center bg-white caret-transparent gap-x-2.5 flex min-h-[auto] min-w-[auto] outline-[3px] gap-y-2.5">
-              <div className="text-green-700 font-bold caret-transparent min-h-[auto] min-w-[auto] outline-[3px]">
+              <div
+                className={`${selectedOperator.color} font-bold caret-transparent min-h-[auto] min-w-[auto] outline-[3px]`}
+              >
                 <img
-                  src="https://c.animaapp.com/mqh5jtbuMW9pRs/assets/safaricom.webp"
-                  alt="Safaricom"
+                  src={selectedOperator.icon}
+                  alt={selectedOperator.name}
                   className="caret-transparent inline outline-[3px] align-baseline w-20"
                 />
               </div>
               <span className="caret-transparent block min-h-[auto] min-w-[auto] outline-[3px]">
-                Safaricom
+                {selectedOperator.name}
               </span>
             </div>
             <img
@@ -50,44 +78,33 @@ export const AirtimeForm = () => {
               className="caret-transparent h-6 outline-[3px] align-baseline w-6"
             />
           </div>
-          <div className="absolute bg-stone-50 shadow-[rgba(0,0,0,0.1)_0px_4px_12px_0px] caret-transparent hidden flex-col outline-[3px] z-10 py-[5px] rounded-lg top-full inset-x-0">
-            <div className="items-center caret-transparent gap-x-2.5 flex outline-[3px] gap-y-2.5 px-3 py-2.5 hover:bg-neutral-100">
-              <div className="text-green-700 font-bold caret-transparent outline-[3px]">
-                <img
-                  src="https://c.animaapp.com/mqh5jtbuMW9pRs/assets/safaricom.webp"
-                  alt="Safaricom"
-                  className="caret-transparent inline outline-[3px] align-baseline w-20"
-                />
-              </div>
-              <span className="caret-transparent block outline-[3px]">
-                Safaricom
-              </span>
+          {isDropdownOpen && (
+            <div className="absolute bg-stone-50 shadow-[rgba(0,0,0,0.1)_0px_4px_12px_0px] caret-transparent flex flex-col outline-[3px] z-10 py-[5px] rounded-lg top-full inset-x-0">
+              {OPERATORS.map((operator) => (
+                <div
+                  key={operator.name}
+                  onClick={() => {
+                    setSelectedOperator(operator);
+                    setIsDropdownOpen(false);
+                  }}
+                  className="items-center caret-transparent gap-x-2.5 flex outline-[3px] gap-y-2.5 px-3 py-2.5 hover:bg-neutral-100 cursor-pointer"
+                >
+                  <div
+                    className={`${operator.color} font-bold caret-transparent outline-[3px]`}
+                  >
+                    <img
+                      src={operator.icon}
+                      alt={operator.name}
+                      className="caret-transparent inline outline-[3px] align-baseline w-20"
+                    />
+                  </div>
+                  <span className="caret-transparent block outline-[3px]">
+                    {operator.name}
+                  </span>
+                </div>
+              ))}
             </div>
-            <div className="items-center caret-transparent gap-x-2.5 flex outline-[3px] gap-y-2.5 px-3 py-2.5 hover:bg-neutral-100">
-              <div className="text-red-600 font-bold caret-transparent outline-[3px]">
-                <img
-                  src="https://c.animaapp.com/mqh5jtbuMW9pRs/assets/airtel.webp"
-                  alt="Airtel"
-                  className="caret-transparent inline outline-[3px] align-baseline w-20"
-                />
-              </div>
-              <span className="caret-transparent block outline-[3px]">
-                Airtel
-              </span>
-            </div>
-            <div className="items-center caret-transparent gap-x-2.5 flex outline-[3px] gap-y-2.5 px-3 py-2.5 hover:bg-neutral-100">
-              <div className="text-sky-600 font-bold caret-transparent outline-[3px]">
-                <img
-                  src="https://c.animaapp.com/mqh5jtbuMW9pRs/assets/telcom.webp"
-                  alt="Telkom"
-                  className="caret-transparent inline outline-[3px] align-baseline w-20"
-                />
-              </div>
-              <span className="caret-transparent block outline-[3px]">
-                Telkom
-              </span>
-            </div>
-          </div>
+          )}
         </div>
       </div>
       <div className="caret-transparent outline-[3px] text-left mb-5 px-5">
@@ -126,8 +143,8 @@ export const AirtimeForm = () => {
       <div className="border-t-blue-500 caret-transparent hidden h-10 outline-[3px] w-10 mx-auto my-5 rounded-[50%] border-b-black/10 border-x-black/10 border-4 border-solid"></div>
       <div className="caret-transparent outline-[3px]">
         <p className="caret-transparent outline-[3px] my-4">
-          0700 000 000 will receive KES 200 worth of airtime. You&#39;ll pay KES
-          183.
+          0700 000 000 will receive KES 200 worth of airtime. You&#39;ll pay
+          KES 183.
         </p>
       </div>
       <div className="text-white bg-green-500 caret-transparent hidden outline-[3px] mb-5 p-[15px] rounded-[5px]">
