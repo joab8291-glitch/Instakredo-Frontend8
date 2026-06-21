@@ -1,13 +1,19 @@
 import { AirtimePurchaseSection } from "@/sections/AirtimePurchaseSection";
+import { StatsStrip } from "@/sections/StatsStrip";
+import { PricingSection } from "@/sections/PricingSection";
 import { FeaturesSection } from "@/sections/FeaturesSection";
-import { CallToActionSection } from "@/sections/CallToActionSection";
+import { FAQSection } from "@/sections/FAQSection";
+import { WhatsAppCTA } from "@/sections/WhatsAppSection";
 
 export const Main = () => {
   return (
     <main className="caret-transparent outline-[3px] py-[50px]">
       <AirtimePurchaseSection />
+      <StatsStrip />
+      <PricingSection />
       <FeaturesSection />
-      <CallToActionSection />
+      <FAQSection />
+      <WhatsAppCTA />
     </main>
   );
 };
