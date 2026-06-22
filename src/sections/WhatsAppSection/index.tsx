@@ -4,11 +4,13 @@ export const WhatsAppCTA = () => {
 
   return (
     <>
-      <div className="bg-[#0d130f] text-center px-5 py-12 border-y border-amber-400/10">
-        <h2 className="font-poppins text-2xl md:text-3xl font-extrabold mb-2 text-white">
+      <div className="bg-white text-center px-5 py-12 border-y border-green-700/15">
+        <h2 className="font-poppins text-2xl md:text-3xl font-extrabold mb-2">
           Need help? We're one tap away.
         </h2>
-        <p className="text-[#6b8070] mb-5">Our support team is on WhatsApp 24/7.</p>
+        <p className="text-stone-500 mb-5">
+          Our support team is on WhatsApp 24/7.
+        </p>
         <a
           href={`https://wa.me/${phone}?text=${message}`}
           target="_blank"
@@ -18,6 +20,7 @@ export const WhatsAppCTA = () => {
           💬 Chat on WhatsApp
         </a>
       </div>
+
       <a
         href={`https://wa.me/${phone}?text=${message}`}
         target="_blank"
@@ -28,4 +31,4 @@ export const WhatsAppCTA = () => {
       </a>
     </>
   );
-}
+};
