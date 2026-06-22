@@ -1,9 +1,9 @@
 import { useState } from "react";
 
 const OPERATORS = [
-  { name: "Safaricom", icon: "https://c.animaapp.com/mqh5jtbuMW9pRs/assets/safaricom.webp", color: "text-green-400" },
-  { name: "Airtel", icon: "https://c.animaapp.com/mqh5jtbuMW9pRs/assets/airtel.webp", color: "text-red-400" },
-  { name: "Telkom", icon: "https://c.animaapp.com/mqh5jtbuMW9pRs/assets/telcom.webp", color: "text-sky-400" },
+  { name: "Safaricom", icon: "https://c.animaapp.com/mqh5jtbuMW9pRs/assets/safaricom.webp" },
+  { name: "Airtel", icon: "https://c.animaapp.com/mqh5jtbuMW9pRs/assets/airtel.webp" },
+  { name: "Telkom", icon: "https://c.animaapp.com/mqh5jtbuMW9pRs/assets/telcom.webp" },
 ];
 
 const DISCOUNT = 0.025;
@@ -11,6 +11,7 @@ const DISCOUNT = 0.025;
 export const AirtimeForm = () => {
   const [selectedOperator, setSelectedOperator] = useState(OPERATORS[0]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [fromPhone, setFromPhone] = useState("");
   const [toPhone, setToPhone] = useState("");
   const [amount, setAmount] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -21,12 +22,16 @@ export const AirtimeForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!/^0[17]\d{8}$/.test(fromPhone.trim())) {
+      setError("Please enter a valid paying phone number.");
+      return;
+    }
     if (!/^0[17]\d{8}$/.test(toPhone.trim())) {
-      setError("Please enter a valid Kenyan phone number.");
+      setError("Please enter a valid recipient phone number.");
       return;
     }
     if (!numericAmount || numericAmount < 20 || numericAmount > 10000) {
-      setError("Amount must be between KES 20 and KES 10000!");
+      setError("Amount must be between KES 20 and KES 10,000!");
       return;
     }
     setError("");
@@ -70,7 +75,20 @@ export const AirtimeForm = () => {
 
         <div className="text-left mb-5 px-5">
           <label className="font-semibold block mb-[5px] text-[#94a89c] text-sm">
-            To: Enter Mobile number
+            From: Mobile number (To charge via M-PESA)
+          </label>
+          <input
+            type="tel"
+            value={fromPhone}
+            onChange={(e) => setFromPhone(e.target.value)}
+            placeholder="07XX XXX XXX"
+            className="bg-[#121810] text-white w-full border border-amber-400/15 mt-[5px] p-3.5 rounded-lg outline-none focus:border-green-400"
+          />
+        </div>
+
+        <div className="text-left mb-5 px-5">
+          <label className="font-semibold block mb-[5px] text-[#94a89c] text-sm">
+            To: Recipient mobile number
           </label>
           <input
             type="tel"
@@ -83,35 +101,43 @@ export const AirtimeForm = () => {
 
         <div className="text-left mb-5 px-5">
           <label className="font-semibold block mb-[5px] text-[#94a89c] text-sm">
-            Enter Amount
+            Enter Amount (KES)
           </label>
           <input
             type="number"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            placeholder="Min 20"
+            placeholder="Min KES 20"
             className="bg-[#121810] text-white w-full border border-amber-400/15 mt-[5px] p-3.5 rounded-lg outline-none focus:border-green-400"
           />
         </div>
 
         <div className="bg-[#0d130f] border border-amber-400/15 rounded-xl mx-5 p-4 flex justify-between items-center mb-5">
-          <span className="text-sm text-[#6b8070]">You pay</span>
-          <span className="font-poppins text-xl font-extrabold text-amber-300">
-            KES {payAmount.toLocaleString()}
-          </span>
+          <div>
+            <div className="text-xs text-[#6b8070]">You pay</div>
+            <div className="font-poppins text-xl font-extrabold text-amber-300">
+              KES {payAmount.toLocaleString()}
+            </div>
+          </div>
+          <div className="text-right">
+            <div className="text-xs text-[#6b8070]">You receive</div>
+            <div className="font-poppins text-xl font-extrabold text-green-400">
+              KES {numericAmount.toLocaleString()}
+            </div>
+          </div>
         </div>
 
         {error && (
-          <div className="text-white bg-red-600 mx-5 mb-5 p-[15px] rounded-[5px]">
+          <div className="text-white bg-red-600 mx-5 mb-5 p-[15px] rounded-lg">
             {error}
           </div>
         )}
 
         <button
           type="submit"
-          className="text-[#0a0f0c] font-bold items-center bg-gradient-to-r from-green-400 to-green-600 gap-x-2 inline-flex m-5 px-7 py-3.5 rounded-full hover:opacity-90"
+          className="text-[#0a0f0c] font-bold items-center bg-gradient-to-r from-green-400 to-green-600 inline-flex m-5 px-7 py-3.5 rounded-full hover:opacity-90"
         >
-          Buy Airtime now
+          Buy Airtime now →
         </button>
       </form>
 
@@ -123,14 +149,15 @@ export const AirtimeForm = () => {
             <p className="text-[#6b8070] text-sm mb-4">
               Send payment via M-PESA to complete your order
             </p>
-            <div className="bg-[#0d130f] rounded-xl p-4 text-left text-sm mb-4 space-y-1 text-[#94a89c]">
-              <div><strong className="text-white">M-PESA Till Number:</strong> <span className="text-amber-300">[Placeholder — pending registration]</span></div>
+            <div className="bg-[#0d130f] rounded-xl p-4 text-left text-sm mb-4 space-y-2 text-[#94a89c]">
+              <div><strong className="text-white">M-PESA Till:</strong> <span className="text-amber-300">[Pending registration]</span></div>
               <div><strong className="text-white">Amount to pay:</strong> <span className="text-amber-300 font-bold">KES {payAmount.toLocaleString()}</span></div>
-              <div><strong className="text-white">You'll receive:</strong> KES {numericAmount.toLocaleString()} airtime</div>
+              <div><strong className="text-white">You'll receive:</strong> <span className="text-green-400">KES {numericAmount.toLocaleString()} airtime</span></div>
+              <div><strong className="text-white">To number:</strong> <span className="text-white">{toPhone}</span></div>
             </div>
             <a
               href={`https://wa.me/254722822256?text=${encodeURIComponent(
-                `Hello InstaKredo, I have placed an order for KES ${numericAmount} ${selectedOperator.name} airtime to ${toPhone}.`
+                `Hello InstaKredo, I have placed an order:\nNetwork: ${selectedOperator.name}\nAmount: KES ${numericAmount}\nTo: ${toPhone}\nFrom: ${fromPhone}`
               )}`}
               target="_blank"
               rel="noreferrer"
