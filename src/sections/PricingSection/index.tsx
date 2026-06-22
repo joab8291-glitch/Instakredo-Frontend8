@@ -25,7 +25,9 @@ export const PricingSection = () => {
               <span className="absolute top-3 right-3 bg-amber-400/10 border border-amber-400/20 text-amber-300 text-[11px] font-bold px-2 py-1 rounded-full">
                 Save KES {tier.save}
               </span>
-              <div className="text-xs text-[#6b8070] tracking-wide">You receive</div>
+              <div className="text-xs text-[#6b8070] tracking-wide">
+                You receive
+              </div>
               <div className="font-poppins text-2xl font-extrabold my-2 text-white">
                 KES {tier.get.toLocaleString()}
               </div>
