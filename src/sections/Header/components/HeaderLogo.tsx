@@ -11,7 +11,11 @@ export const HeaderLogo = () => {
         <span className="text-[11px] text-[#6b8070] uppercase tracking-wider">
           Powered by
         </span>
-        <img src={packsonLogo} alt="Packson Ventures" className="h-5 w-auto opacity-80" />
+        <img
+          src={packsonLogo}
+          alt="Packson Ventures"
+          className="h-5 w-auto opacity-80"
+        />
       </div>
     </div>
   );
