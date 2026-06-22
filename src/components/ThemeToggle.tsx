@@ -10,9 +10,23 @@ export const ThemeToggle = () => {
   return (
     <button
       onClick={() => setIsDark(!isDark)}
-      className="fixed top-4 right-4 z-[200] flex items-center gap-2 bg-[#121810] border border-amber-400/20 px-4 py-2 rounded-full text-sm font-semibold text-white hover:border-amber-400/50 transition"
+      style={{
+        position: "fixed",
+        top: "16px",
+        right: "16px",
+        zIndex: 9999,
+        background: isDark ? "#d4af37" : "#121810",
+        color: isDark ? "#0a0f0c" : "#ffffff",
+        border: "none",
+        padding: "10px 20px",
+        borderRadius: "40px",
+        fontWeight: 700,
+        fontSize: "14px",
+        cursor: "pointer",
+        boxShadow: "0 4px 16px rgba(0,0,0,0.4)",
+      }}
     >
-      {isDark ? "☀️ Light" : "🌙 Dark"}
+      {isDark ? "☀️ Light Mode" : "🌙 Dark Mode"}
     </button>
   );
 };
