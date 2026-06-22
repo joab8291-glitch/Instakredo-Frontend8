@@ -5,10 +5,6 @@ export const HeaderContent = () => {
   return (
     <div className="caret-transparent basis-[0%] grow min-h-[auto] min-w-[auto] outline-[3px] text-center pl-0 md:text-left md:pl-[10%]">
       <HeaderLogo />
-      <div className="inline-flex items-center gap-2 bg-green-50 border border-green-700/20 rounded-full px-4 py-1.5 text-xs mb-4">
-        <span className="w-2 h-2 bg-green-600 rounded-full animate-pulse" />
-        Live · Instant Processing
-      </div>
       <div className="caret-transparent leading-8 outline-[3px] text-center md:text-left">
         <h1 className="text-2xl font-bold caret-transparent outline-[3px] text-center my-[16.08px] md:text-[44.8px] md:text-left md:my-[30.016px]">
           Instant Airtime.{" "}
@@ -19,7 +15,7 @@ export const HeaderContent = () => {
           </span>
           , Anywhere.{" "}
           <span className="text-green-700 text-2xl caret-transparent outline-[3px] text-center md:text-[44.8px] md:text-left">
-            Enjoy up to 2.5%
+            Enjoy up to 15%
             <br className="text-2xl caret-transparent outline-[3px] text-center md:text-[44.8px] md:text-left" />
             <br className="text-2xl caret-transparent outline-[3px] text-center md:text-[44.8px] md:text-left" />
             discount.{" "}
