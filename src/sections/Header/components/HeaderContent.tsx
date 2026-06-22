@@ -9,7 +9,7 @@ export const HeaderContent = () => {
         <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
         Live · Instant Processing
       </div>
-      <h1 className="font-poppins text-3xl md:text-[52px] font-extrabold leading-[1.1] text-center md:text-left mb-4 text-white">
+      <h1 className="font-poppins text-3xl md:text-[52px] font-extrabold leading-[1.1] text-center md:text-left mb-4">
         Recharge Faster.{" "}
         <span className="text-amber-300">Pay Less.</span>
         <br />
@@ -24,7 +24,10 @@ export const HeaderContent = () => {
         <span className="text-green-400 font-semibold">M-PESA</span>.
       </p>
       <HeaderActions buttonText="Buy Airtime now" />
-      <HeaderActions buttonText="Buy Pin Voucher now" href="/buy-voucher#sender-number" />
+      <HeaderActions
+        buttonText="Buy Pin Voucher now"
+        href="/buy-voucher#sender-number"
+      />
     </div>
   );
 };
