@@ -42,30 +42,30 @@ export const AirtimeForm = () => {
     <>
       <form onSubmit={handleSubmit}>
         <div className="text-left mb-5 px-5">
-          <label className="font-semibold block mb-[5px] text-[#94a89c] text-sm">
+          <label className="font-semibold block mb-[5px] text-stone-500 text-sm">
             Select Operator
           </label>
           <div className="relative w-full">
             <div
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="items-center bg-[#121810] flex justify-between border border-amber-400/15 p-3 rounded-lg cursor-pointer"
+              className="items-center bg-white flex justify-between border border-stone-200 p-3 rounded-lg cursor-pointer hover:border-green-500 transition"
             >
               <div className="items-center flex gap-x-2.5">
                 <img src={selectedOperator.icon} alt={selectedOperator.name} className="w-16 rounded" />
-                <span className="text-white">{selectedOperator.name}</span>
+                <span className="text-neutral-900 font-medium">{selectedOperator.name}</span>
               </div>
-              <span className="text-amber-300">▼</span>
+              <span className="text-green-700">▼</span>
             </div>
             {isDropdownOpen && (
-              <div className="absolute bg-[#121810] border border-amber-400/15 flex flex-col z-10 py-[5px] rounded-lg top-full inset-x-0">
+              <div className="absolute bg-white border border-stone-200 flex flex-col z-10 py-[5px] rounded-lg top-full inset-x-0 shadow-md">
                 {OPERATORS.map((op) => (
                   <div
                     key={op.name}
                     onClick={() => { setSelectedOperator(op); setIsDropdownOpen(false); }}
-                    className="items-center gap-x-2.5 flex px-3 py-2.5 hover:bg-[#1a221c] cursor-pointer"
+                    className="items-center gap-x-2.5 flex px-3 py-2.5 hover:bg-stone-50 cursor-pointer"
                   >
                     <img src={op.icon} alt={op.name} className="w-16 rounded" />
-                    <span className="text-white">{op.name}</span>
+                    <span className="text-neutral-900">{op.name}</span>
                   </div>
                 ))}
               </div>
@@ -74,7 +74,7 @@ export const AirtimeForm = () => {
         </div>
 
         <div className="text-left mb-5 px-5">
-          <label className="font-semibold block mb-[5px] text-[#94a89c] text-sm">
+          <label className="font-semibold block mb-[5px] text-stone-500 text-sm">
             From: Mobile number (To charge via M-PESA)
           </label>
           <input
@@ -82,12 +82,12 @@ export const AirtimeForm = () => {
             value={fromPhone}
             onChange={(e) => setFromPhone(e.target.value)}
             placeholder="07XX XXX XXX"
-            className="bg-[#121810] text-white w-full border border-amber-400/15 mt-[5px] p-3.5 rounded-lg outline-none focus:border-green-400"
+            className="bg-white text-neutral-900 w-full border border-stone-200 mt-[5px] p-3.5 rounded-lg outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition"
           />
         </div>
 
         <div className="text-left mb-5 px-5">
-          <label className="font-semibold block mb-[5px] text-[#94a89c] text-sm">
+          <label className="font-semibold block mb-[5px] text-stone-500 text-sm">
             To: Recipient mobile number
           </label>
           <input
@@ -95,12 +95,12 @@ export const AirtimeForm = () => {
             value={toPhone}
             onChange={(e) => setToPhone(e.target.value)}
             placeholder="07XX XXX XXX"
-            className="bg-[#121810] text-white w-full border border-amber-400/15 mt-[5px] p-3.5 rounded-lg outline-none focus:border-green-400"
+            className="bg-white text-neutral-900 w-full border border-stone-200 mt-[5px] p-3.5 rounded-lg outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition"
           />
         </div>
 
         <div className="text-left mb-5 px-5">
-          <label className="font-semibold block mb-[5px] text-[#94a89c] text-sm">
+          <label className="font-semibold block mb-[5px] text-stone-500 text-sm">
             Enter Amount (KES)
           </label>
           <input
@@ -108,52 +108,52 @@ export const AirtimeForm = () => {
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             placeholder="Min KES 20"
-            className="bg-[#121810] text-white w-full border border-amber-400/15 mt-[5px] p-3.5 rounded-lg outline-none focus:border-green-400"
+            className="bg-white text-neutral-900 w-full border border-stone-200 mt-[5px] p-3.5 rounded-lg outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition"
           />
         </div>
 
-        <div className="bg-[#0d130f] border border-amber-400/15 rounded-xl mx-5 p-4 flex justify-between items-center mb-5">
+        <div className="bg-green-50 border border-green-200 rounded-xl mx-5 p-4 flex justify-between items-center mb-5">
           <div>
-            <div className="text-xs text-[#6b8070]">You pay</div>
-            <div className="font-poppins text-xl font-extrabold text-amber-300">
+            <div className="text-xs text-stone-500">You pay</div>
+            <div className="font-poppins text-xl font-extrabold text-green-700">
               KES {payAmount.toLocaleString()}
             </div>
           </div>
           <div className="text-right">
-            <div className="text-xs text-[#6b8070]">You receive</div>
-            <div className="font-poppins text-xl font-extrabold text-green-400">
+            <div className="text-xs text-stone-500">You receive</div>
+            <div className="font-poppins text-xl font-extrabold text-green-600">
               KES {numericAmount.toLocaleString()}
             </div>
           </div>
         </div>
 
         {error && (
-          <div className="text-white bg-red-600 mx-5 mb-5 p-[15px] rounded-lg">
+          <div className="text-white bg-red-600 mx-5 mb-5 p-[15px] rounded-lg text-sm">
             {error}
           </div>
         )}
 
         <button
           type="submit"
-          className="text-[#0a0f0c] font-bold items-center bg-gradient-to-r from-green-400 to-green-600 inline-flex m-5 px-7 py-3.5 rounded-full hover:opacity-90"
+          className="text-white font-bold items-center bg-green-700 inline-flex m-5 px-7 py-3.5 rounded-full shadow-[0_4px_12px_rgba(22,163,74,0.3)] hover:bg-green-800 transition"
         >
           Buy Airtime now →
         </button>
       </form>
 
       {showModal && (
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-[1000] p-4">
-          <div className="bg-[#121810] border border-amber-400/20 max-w-[400px] w-full p-6 rounded-2xl text-center">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[1000] p-4">
+          <div className="bg-white border border-stone-200 max-w-[400px] w-full p-6 rounded-2xl text-center shadow-xl">
             <div className="text-3xl mb-2">✅</div>
-            <h3 className="font-bold text-lg mb-1 text-white">Order Received!</h3>
-            <p className="text-[#6b8070] text-sm mb-4">
+            <h3 className="font-bold text-lg mb-1 text-neutral-900">Order Received!</h3>
+            <p className="text-stone-500 text-sm mb-4">
               Send payment via M-PESA to complete your order
             </p>
-            <div className="bg-[#0d130f] rounded-xl p-4 text-left text-sm mb-4 space-y-2 text-[#94a89c]">
-              <div><strong className="text-white">M-PESA Till:</strong> <span className="text-amber-300">[Pending registration]</span></div>
-              <div><strong className="text-white">Amount to pay:</strong> <span className="text-amber-300 font-bold">KES {payAmount.toLocaleString()}</span></div>
-              <div><strong className="text-white">You'll receive:</strong> <span className="text-green-400">KES {numericAmount.toLocaleString()} airtime</span></div>
-              <div><strong className="text-white">To number:</strong> <span className="text-white">{toPhone}</span></div>
+            <div className="bg-stone-50 rounded-xl p-4 text-left text-sm mb-4 space-y-2 border border-stone-200">
+              <div><strong className="text-neutral-900">M-PESA Till:</strong> <span className="text-green-700">[Pending registration]</span></div>
+              <div><strong className="text-neutral-900">Amount to pay:</strong> <span className="text-green-700 font-bold">KES {payAmount.toLocaleString()}</span></div>
+              <div><strong className="text-neutral-900">You'll receive:</strong> <span className="text-green-700">KES {numericAmount.toLocaleString()} airtime</span></div>
+              <div><strong className="text-neutral-900">To number:</strong> {toPhone}</div>
             </div>
             <a
               href={`https://wa.me/254722822256?text=${encodeURIComponent(
@@ -161,13 +161,13 @@ export const AirtimeForm = () => {
               )}`}
               target="_blank"
               rel="noreferrer"
-              className="block bg-[#25d366] text-white font-bold py-3 rounded-full mb-3"
+              className="block bg-[#25d366] text-white font-bold py-3 rounded-full mb-3 hover:opacity-90"
             >
               📲 Notify us on WhatsApp
             </a>
             <button
               onClick={() => setShowModal(false)}
-              className="w-full border border-amber-400/20 text-white py-3 rounded-full"
+              className="w-full border border-stone-200 text-neutral-900 py-3 rounded-full hover:bg-stone-50 transition"
             >
               Close
             </button>
