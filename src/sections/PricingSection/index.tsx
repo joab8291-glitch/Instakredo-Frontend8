@@ -1,4 +1,4 @@
-lconst TIERS = [
+const TIERS = [
   { get: 100, save: 2.5 },
   { get: 500, save: 12.5 },
   { get: 1000, save: 25 },
